@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparadores · Inicio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0c0c10;
+  --s1: #13131a;
+  --s2: #1a1a24;
+  --border: #2c2c3e;
+  --border2: #3a3a52;
+  --accent-o: #f97316;
+  --accent-v: #7c6af7;
+  --green: #3dd68c;
+  --text: #e2e2f0;
+  --muted: #6b6b8a;
+  --muted2: #4a4a65;
+  --font: 'IBM Plex Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+html.light {
+  --bg: #f4f4f7;
+  --s1: #ffffff;
+  --s2: #eeeef3;
+  --border: #d4d4e0;
+  --border2: #b8b8cc;
+  --text: #1a1a2e;
+  --muted: #6b6b8a;
+  --muted2: #9090aa;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: var(--font); min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+}
+
+.theme-btn {
+  position: fixed; top: 14px; right: 16px;
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--border2); background: var(--s1);
+  color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  font-size: 15px;
+}
+.theme-btn:hover { border-color: var(--muted); color: var(--text); }
+
+.container { width: 100%; max-width: 480px; }
+
+.header { margin-bottom: 2.5rem; }
+.eyebrow {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+}
+h1 { font-size: 1.8rem; font-weight: 300; line-height: 1.2; }
+h1 b { font-weight: 600; }
+.sub { margin-top: 8px; color: var(--muted); font-size: 13px; }
+
+.cards { display: flex; flex-direction: column; gap: 12px; }
+
+.card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px; border-radius: 12px;
+  background: var(--s1); border: 1px solid var(--border);
+  text-decoration: none; color: var(--text);
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+}
+.card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.card--modelo::after { background: linear-gradient(90deg, var(--accent-o), transparent); }
+.card--cp::after    { background: linear-gradient(90deg, var(--accent-v), transparent); }
+
+.card:hover { transform: translateY(-2px); }
+.card--modelo:hover { border-color: var(--accent-o); box-shadow: 0 8px 28px rgba(249,115,22,0.12); }
+.card--cp:hover     { border-color: var(--accent-v); box-shadow: 0 8px 28px rgba(124,106,247,0.12); }
+.card:hover::after  { opacity: 1; }
+
+.card__icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.card--modelo .card__icon { background: rgba(249,115,22,0.1); }
+.card--cp .card__icon     { background: rgba(124,106,247,0.1); }
+
+.card__body { flex: 1; min-width: 0; }
+.card__title { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+.card__desc  { font-size: 12px; color: var(--muted); }
+
+.card__arrow {
+  font-size: 1.1rem; color: var(--muted2);
+  transition: transform 0.2s, color 0.2s; flex-shrink: 0;
+}
+.card--modelo:hover .card__arrow { transform: translateX(3px); color: var(--accent-o); }
+.card--cp:hover     .card__arrow { transform: translateX(3px); color: var(--accent-v); }
+</style>
+</head>
+<body>
+
+<button class="theme-btn" id="themeBtn" title="Cambiar tema">☀️</button>
+
+<div class="container">
+  <div class="header">
+    <div class="eyebrow">Herramientas</div>
+    <h1>Panel de <b>Comparadores</b></h1>
+    <p class="sub">Selecciona el comparador que quieres usar</p>
+  </div>
+  <div class="cards">
+    <a class="card card--modelo" href="comparador_modelo_centros_2.html">
+      <div class="card__icon">🏪</div>
+      <div class="card__body">
+        <div class="card__title">Comparador Modelo · Centros</div>
+        <div class="card__desc">Cruza planificación de modelos con la query</div>
+      </div>
+      <span class="card__arrow">→</span>
+    </a>
+    <a class="card card--cp" href="comparador_cp_centros_3.html">
+      <div class="card__icon">📮</div>
+      <div class="card__body">
+        <div class="card__title">Comparador CP · Centros</div>
+        <div class="card__desc">Cruza códigos postales con la query de Metabase</div>
+      </div>
+      <span class="card__arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+const themeBtn = document.getElementById('themeBtn');
+const saved = localStorage.getItem('theme_index') || 'dark';
+if(saved === 'light'){ document.documentElement.classList.add('light'); themeBtn.textContent = '🌙'; }
+themeBtn.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.toggle('light');
+  themeBtn.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('theme_index', isLight ? 'light' : 'dark');
+});
+</script>
+</body>
+</html>
