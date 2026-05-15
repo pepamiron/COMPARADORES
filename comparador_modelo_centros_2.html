@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,6 +27,64 @@
   --font: 'IBM Plex Sans', sans-serif;
   --mono: 'IBM Plex Mono', monospace;
 }
+
+html.light {
+  --bg: #f4f4f7;
+  --s1: #ffffff;
+  --s2: #eeeef3;
+  --border: #d4d4e0;
+  --border2: #b8b8cc;
+  --accent: #e8620a;
+  --accent-h: #f97316;
+  --green: #1aad6e;
+  --yellow: #c49a0a;
+  --blue: #2a7de1;
+  --red: #d94040;
+  --text: #1a1a2e;
+  --muted: #6b6b8a;
+  --muted2: #9090aa;
+}
+
+/* Theme toggle button */
+.theme-btn {
+  position: fixed; top: 14px; right: 16px; z-index: 100;
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--border2); background: var(--s1);
+  color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  font-size: 15px;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--text); }
+
+html.light {
+  --bg: #f4f4f7;
+  --s1: #ffffff;
+  --s2: #eeeef3;
+  --border: #d4d4e0;
+  --border2: #b8b8cc;
+  --accent: #e8620a;
+  --accent-h: #f97316;
+  --green: #1aad6e;
+  --yellow: #c49a0a;
+  --blue: #2a7de1;
+  --red: #d94040;
+  --text: #1a1a2e;
+  --muted: #6b6b8a;
+  --muted2: #9090aa;
+}
+
+/* Theme toggle button */
+.theme-btn {
+  position: fixed; top: 14px; right: 16px; z-index: 100;
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--border2); background: var(--s1);
+  color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  font-size: 15px;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--text); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
@@ -264,6 +323,7 @@ td { padding: 9px 14px; font-family: var(--mono); font-size: 11px; white-space: 
 </style>
 </head>
 <body>
+<button class="theme-btn" id="themeBtn" title="Cambiar tema">☀️</button>
 <div class="layout">
 
   <aside class="sidebar">
@@ -835,6 +895,26 @@ document.getElementById('dlBtn').addEventListener('click',()=>{
   wsR['!cols']=[25,42,16].map(w=>({wch:w}));
   XLSX.utils.book_append_sheet(wb, wsR, 'Resumen');
   XLSX.writeFile(wb, `no_coincidencias_modelo_${new Date().toISOString().slice(0,10)}.xlsx`);
+});
+
+// ── Theme toggle ──────────────────────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
+const savedTheme = localStorage.getItem('theme_modelo') || 'dark';
+if(savedTheme === 'light'){ document.documentElement.classList.add('light'); themeBtn.textContent = '🌙'; }
+themeBtn.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.toggle('light');
+  themeBtn.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('theme_modelo', isLight ? 'light' : 'dark');
+});
+
+// ── Theme toggle ──────────────────────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
+const savedTheme = localStorage.getItem('theme_modelo') || 'dark';
+if(savedTheme === 'light'){ document.documentElement.classList.add('light'); themeBtn.textContent = '🌙'; }
+themeBtn.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.toggle('light');
+  themeBtn.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('theme_modelo', isLight ? 'light' : 'dark');
 });
 
 // ── Init ──────────────────────────────────────────────────────────
