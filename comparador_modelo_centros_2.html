@@ -589,26 +589,24 @@ function readFile(file, cb){
   isCSV ? r.readAsText(file,'UTF-8') : r.readAsArrayBuffer(file);
 }
 
-document.getElementById('file1').addEventListener('change', function(){
+function onFile1Change(){
   if(!this.files[0]) return;
   fname1 = this.files[0].name;
   readFile(this.files[0], rows=>{
-    d1=rows;
-    setLoaded(1, fname1);
-    checkReady();
+    d1=rows; setLoaded(1, fname1); checkReady();
     try{ localStorage.setItem('cached_file1_data', JSON.stringify(rows)); localStorage.setItem('cached_file1_name', fname1); } catch(e){}
   });
-});
-document.getElementById('file2').addEventListener('change', function(){
+}
+function onFile2Change(){
   if(!this.files[0]) return;
   fname2 = this.files[0].name;
   readFile(this.files[0], rows=>{
-    d2=rows;
-    setLoaded(2, fname2);
-    checkReady();
+    d2=rows; setLoaded(2, fname2); checkReady();
     try{ localStorage.setItem('cached_file2_data', JSON.stringify(rows)); localStorage.setItem('cached_file2_name', fname2); } catch(e){}
   });
-});
+}
+document.getElementById('file1').addEventListener('change', onFile1Change);
+document.getElementById('file2').addEventListener('change', onFile2Change);
 
 // ── Restore cached files ──────────────────────────────────────────
 (function restoreCachedFiles(){
@@ -641,7 +639,12 @@ function clearCache(n){
   document.getElementById(`dot${n}`).classList.remove('on');
   document.getElementById(`card${n}`).classList.remove('loaded');
   document.getElementById(`clear${n}`).style.display='none';
-  document.getElementById(`file${n}`).value='';
+  const input = document.getElementById(`file${n}`);
+  input.value='';
+  // Reemplazar el input para que siempre dispare change aunque sea el mismo fichero
+  const newInput = input.cloneNode(true);
+  input.parentNode.replaceChild(newInput, input);
+  newInput.addEventListener('change', n===1 ? onFile1Change : onFile2Change);
   checkReady();
 }
 function checkReady(){ document.getElementById('runBtn').disabled = !(d1&&d2); }
