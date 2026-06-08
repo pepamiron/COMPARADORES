@@ -617,8 +617,14 @@ function saveExclusions(arr) {
 }
 function parseExclText(txt) {
   return [...new Set(
-    txt.split(/[\n,\s]+/)
-       .map(s => s.trim().padStart(5,'0'))
+    txt.split(/[\n,;]+/)
+       .map(s => s.trim())
+       // quitar decimal tipo "30380.1" → "30380"
+       .map(s => s.replace(/^(\d+)\..*$/, '$1'))
+       // quitar espacios internos y caracteres no numéricos
+       .map(s => s.replace(/\D/g, ''))
+       .filter(s => s.length > 0)
+       .map(s => s.padStart(5,'0'))
        .filter(s => /^\d{5}$/.test(s))
   )];
 }
