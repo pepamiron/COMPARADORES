@@ -21,6 +21,7 @@
   --yellow: #f5c542;
   --blue: #5ba4f5;
   --red: #f06a6a;
+  --orange: #f5923e;
   --text: #e2e2f0;
   --muted: #6b6b8a;
   --muted2: #4a4a65;
@@ -41,12 +42,12 @@ html.light {
   --yellow: #c49a0a;
   --blue: #2a7de1;
   --red: #d94040;
+  --orange: #d4700a;
   --text: #1a1a2e;
   --muted: #6b6b8a;
   --muted2: #9090aa;
 }
 
-/* Theme toggle button */
 .theme-btn {
   position: fixed; top: 14px; right: 16px; z-index: 100;
   width: 34px; height: 34px; border-radius: 8px;
@@ -82,7 +83,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 }
 .new-btn:hover { background: var(--accent-h); transform: translateY(-1px); }
 
-/* ── Accesos directos ── */
 .quick-links {
   margin: 12px 20px 0;
   display: flex; flex-direction: column; gap: 6px;
@@ -103,10 +103,63 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 .quick-link:hover { border-color: var(--accent); background: rgba(124,106,247,0.07); color: var(--text); }
 .quick-link svg { flex-shrink: 0; opacity: 0.7; }
 .quick-link span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* ───────────────────── */
 
-.hist-label { padding: 16px 20px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
-.hist-list { flex: 1; overflow-y: auto; padding: 0 10px 16px; }
+/* ── Exclusión en sidebar ── */
+.excl-section {
+  margin: 12px 20px 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.excl-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px; background: var(--s2); cursor: pointer;
+  user-select: none;
+}
+.excl-header-left { display: flex; align-items: center; gap: 7px; }
+.excl-header-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted2);
+}
+.excl-badge {
+  font-family: var(--mono); font-size: 9px;
+  background: rgba(245,146,62,0.15); color: var(--orange);
+  border: 1px solid rgba(245,146,62,0.3);
+  padding: 1px 6px; border-radius: 10px;
+  display: none;
+}
+.excl-badge.show { display: inline-block; }
+.excl-chevron {
+  font-size: 10px; color: var(--muted2);
+  transition: transform 0.2s;
+}
+.excl-body { display: none; padding: 10px; }
+.excl-body.open { display: block; }
+.excl-chevron.open { transform: rotate(180deg); }
+
+.excl-textarea {
+  width: 100%; height: 80px; resize: vertical;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text);
+  font-family: var(--mono); font-size: 10px; line-height: 1.7;
+  padding: 7px 9px; outline: none;
+  transition: border-color 0.2s;
+}
+.excl-textarea:focus { border-color: var(--accent); }
+.excl-hint { font-size: 10px; color: var(--muted2); margin-top: 5px; line-height: 1.5; }
+.excl-save-btn {
+  margin-top: 7px; width: 100%; padding: 6px;
+  background: rgba(245,146,62,0.12); border: 1px solid rgba(245,146,62,0.35);
+  color: var(--orange); border-radius: 6px;
+  font-family: var(--font); font-size: 11px; font-weight: 500;
+  cursor: pointer; transition: background 0.15s;
+}
+.excl-save-btn:hover { background: rgba(245,146,62,0.22); }
+/* ───────────────────────── */
+
+.hist-label { padding: 14px 20px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+.hist-list { flex: 1; overflow-y: auto; padding: 0 10px 16px; min-height: 0; }
 .hist-list::-webkit-scrollbar { width: 3px; }
 .hist-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 .hist-item {
@@ -170,6 +223,39 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border2); flex-shrink: 0; }
 .dot.on { background: var(--green); box-shadow: 0 0 8px var(--green); }
 
+/* ── Exclusión en upload ── */
+.excl-upload-block {
+  background: var(--s1); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px; margin-bottom: 16px;
+}
+.excl-upload-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.excl-upload-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600;
+}
+.excl-upload-title svg { color: var(--orange); }
+.excl-upload-badge {
+  font-family: var(--mono); font-size: 10px;
+  background: rgba(245,146,62,0.12); color: var(--orange);
+  border: 1px solid rgba(245,146,62,0.25);
+  padding: 2px 8px; border-radius: 10px;
+}
+.excl-upload-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+.excl-upload-textarea {
+  width: 100%; height: 70px; resize: vertical;
+  background: var(--s2); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text);
+  font-family: var(--mono); font-size: 11px; line-height: 1.8;
+  padding: 7px 10px; outline: none;
+  transition: border-color 0.2s;
+}
+.excl-upload-textarea:focus { border-color: var(--orange); }
+.excl-upload-hint { font-size: 11px; color: var(--muted2); margin-top: 6px; }
+/* ─────────────────────── */
+
 .run-btn {
   width: 100%; padding: 14px; background: var(--accent); color: #fff;
   border: none; border-radius: 10px; font-family: var(--font); font-size: 14px; font-weight: 600;
@@ -196,6 +282,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
 .btn-ghost.green { border-color: rgba(61,214,140,0.4); color: var(--green); }
 .btn-ghost.green:hover { background: rgba(61,214,140,0.08); }
+.btn-ghost.orange { border-color: rgba(245,146,62,0.4); color: var(--orange); }
+.btn-ghost.orange:hover { background: rgba(245,146,62,0.08); }
 
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
 .stat {
@@ -206,6 +294,79 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 .stat.vis { opacity: 1; transform: none; }
 .stat-n { font-family: var(--mono); font-size: 26px; font-weight: 500; line-height: 1; margin-bottom: 5px; }
 .stat-l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+
+/* ── Banner exclusión en resultados ── */
+.excl-results-bar {
+  display: none;
+  align-items: center; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap;
+  background: rgba(245,146,62,0.06);
+  border: 1px solid rgba(245,146,62,0.25);
+  border-radius: 8px; padding: 9px 14px;
+  margin-bottom: 16px;
+}
+.excl-results-bar.show { display: flex; }
+.excl-results-info {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--orange);
+}
+.excl-results-info svg { flex-shrink: 0; }
+.excl-results-actions { display: flex; gap: 6px; align-items: center; }
+/* ──────────────────────────────── */
+
+/* Modal de exclusión */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--s1); border: 1px solid var(--border2);
+  border-radius: 14px; padding: 28px; width: 440px; max-width: 90vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  animation: modalIn 0.2s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.modal-title { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.modal-title svg { color: var(--orange); }
+.modal-close {
+  background: none; border: none; color: var(--muted2);
+  cursor: pointer; font-size: 18px; padding: 2px 6px; border-radius: 4px;
+  transition: color 0.15s;
+}
+.modal-close:hover { color: var(--text); }
+.modal-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
+.modal-textarea {
+  width: 100%; height: 140px; resize: vertical;
+  background: var(--s2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text);
+  font-family: var(--mono); font-size: 11px; line-height: 1.9;
+  padding: 10px 12px; outline: none;
+  transition: border-color 0.2s;
+}
+.modal-textarea:focus { border-color: var(--orange); }
+.modal-hint { font-size: 11px; color: var(--muted2); margin-top: 7px; }
+.modal-footer { display: flex; gap: 8px; margin-top: 18px; justify-content: flex-end; }
+.modal-cancel {
+  padding: 8px 18px; border: 1px solid var(--border2);
+  background: transparent; color: var(--muted); border-radius: 7px;
+  font-family: var(--font); font-size: 13px; cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.modal-cancel:hover { border-color: var(--text); color: var(--text); }
+.modal-save {
+  padding: 8px 20px;
+  background: rgba(245,146,62,0.15); border: 1px solid rgba(245,146,62,0.4);
+  color: var(--orange); border-radius: 7px;
+  font-family: var(--font); font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: background 0.15s;
+}
+.modal-save:hover { background: rgba(245,146,62,0.25); }
 
 .tbl-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
 .filter-btn {
@@ -259,6 +420,27 @@ td { padding: 9px 14px; font-family: var(--mono); font-size: 11px; white-space: 
 </head>
 <body>
 <button class="theme-btn" id="themeBtn" title="Cambiar tema">☀️</button>
+
+<!-- Modal de exclusión -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        CPs excluidos del análisis
+      </div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-desc">Estos códigos postales se ignorarán siempre en los resultados — no aparecerán en la tabla ni en los contadores. Úsalo para CPs estructurales que no puedes modificar.</div>
+    <textarea class="modal-textarea" id="modalTextarea" placeholder="08001&#10;28001&#10;46001&#10;..."></textarea>
+    <div class="modal-hint">Un CP por línea, o separados por comas o espacios. Se guardan automáticamente.</div>
+    <div class="modal-footer">
+      <button class="modal-cancel" id="modalCancel">Cancelar</button>
+      <button class="modal-save" id="modalSave">Guardar exclusiones</button>
+    </div>
+  </div>
+</div>
+
 <div class="layout">
 
   <aside class="sidebar">
@@ -288,12 +470,30 @@ td { padding: 9px 14px; font-family: var(--mono); font-size: 11px; white-space: 
       </a>
     </div>
 
+    <!-- Exclusión en sidebar -->
+    <div class="excl-section">
+      <div class="excl-header" id="sidebarExclHeader">
+        <div class="excl-header-left">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          <span class="excl-header-label">CPs excluidos</span>
+          <span class="excl-badge" id="sidebarBadge">0</span>
+        </div>
+        <span class="excl-chevron" id="sidebarChevron">▾</span>
+      </div>
+      <div class="excl-body" id="sidebarExclBody">
+        <textarea class="excl-textarea" id="sidebarExclText" placeholder="08001&#10;28001&#10;46001&#10;..."></textarea>
+        <div class="excl-hint">Un CP por línea o separados por comas. Se aplica a todos los análisis.</div>
+        <button class="excl-save-btn" id="sidebarExclSave">Guardar</button>
+      </div>
+    </div>
+
     <div class="hist-label">Ejecuciones guardadas</div>
     <div class="hist-list" id="histList"></div>
   </aside>
 
   <main class="main">
 
+    <!-- Vista Upload -->
     <div id="view-upload">
       <div class="page-header">
         <div class="page-eyebrow">Nueva comparativa</div>
@@ -316,6 +516,23 @@ td { padding: 9px 14px; font-family: var(--mono); font-size: 11px; white-space: 
           <div class="ucard-status"><div class="dot" id="dot2"></div><span id="st2">Arrastra o haz clic para subir</span></div>
         </div>
       </div>
+
+      <!-- Exclusión en panel de carga -->
+      <div class="excl-upload-block">
+        <div class="excl-upload-head">
+          <div class="excl-upload-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            CPs excluidos del análisis
+          </div>
+          <span class="excl-upload-badge" id="uploadBadge">0 excluidos</span>
+        </div>
+        <div class="excl-upload-desc">
+          CPs que siempre aparecen como no coincidencia pero no puedes corregir (ni en la query ni en el Drive). Se ignorarán en la tabla y en los contadores.
+        </div>
+        <textarea class="excl-upload-textarea" id="uploadExclText" placeholder="08001&#10;28001&#10;46001   (uno por línea o separados por comas)"></textarea>
+        <div class="excl-upload-hint">Los cambios se sincronizan con la barra lateral automáticamente.</div>
+      </div>
+
       <button class="run-btn" id="runBtn" disabled>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Ejecutar comparativa
@@ -326,16 +543,33 @@ td { padding: 9px 14px; font-family: var(--mono); font-size: 11px; white-space: 
       </div>
     </div>
 
+    <!-- Vista Resultados -->
     <div id="view-results">
       <div class="results-topbar">
         <div class="results-meta">Comparativa del <span id="res-date">—</span></div>
         <div style="display:flex;gap:8px">
+          <button class="btn-ghost orange" id="editExclBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            Exclusiones
+          </button>
           <button class="btn-ghost green" id="dlBtn">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Descargar Excel
           </button>
         </div>
       </div>
+
+      <!-- Banner exclusión en resultados -->
+      <div class="excl-results-bar" id="exclResultsBar">
+        <div class="excl-results-info">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          <span id="exclResultsText">0 CPs excluidos del análisis</span>
+        </div>
+        <div class="excl-results-actions">
+          <button class="btn-ghost orange" id="exclResultsEditBtn" style="padding:4px 10px;font-size:11px;">Editar lista</button>
+        </div>
+      </div>
+
       <div class="stats-row">
         <div class="stat" id="sc0"><div class="stat-n" id="sn0" style="color:var(--accent)">0</div><div class="stat-l">No coincidencias</div></div>
         <div class="stat" id="sc1"><div class="stat-n" id="sn1" style="color:var(--yellow)">0</div><div class="stat-l">Centro distinto</div></div>
@@ -368,30 +602,122 @@ td { padding: 9px 14px; font-family: var(--mono); font-size: 11px; white-space: 
 </div>
 
 <script>
-const PAGE=50;
-let d1=null,d2=null,fname1='',fname2='';
-let currentRows=[],filteredRows=[],curPage=1,curFilter='all',activeRunId=null;
-const STORAGE_KEY='cp_centros_history_v2';
+const PAGE = 50;
+let d1=null, d2=null, fname1='', fname2='';
+let currentRows=[], filteredRows=[], curPage=1, curFilter='all', activeRunId=null;
+const STORAGE_KEY = 'cp_centros_history_v2';
+const EXCL_KEY    = 'cp_centros_exclusions_v1';
 
-function loadHistory(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch{return[];}}
+// ── Exclusiones ──────────────────────────────────────────────
+function loadExclusions() {
+  try { return JSON.parse(localStorage.getItem(EXCL_KEY) || '[]'); } catch { return []; }
+}
+function saveExclusions(arr) {
+  localStorage.setItem(EXCL_KEY, JSON.stringify(arr));
+}
+function parseExclText(txt) {
+  return [...new Set(
+    txt.split(/[\n,\s]+/)
+       .map(s => s.trim().padStart(5,'0'))
+       .filter(s => /^\d{5}$/.test(s))
+  )];
+}
+function getExclSet() {
+  return new Set(loadExclusions());
+}
+function syncExclUI() {
+  const arr = loadExclusions();
+  const txt = arr.join('\n');
+  // sidebar
+  document.getElementById('sidebarExclText').value = txt;
+  const badge = document.getElementById('sidebarBadge');
+  badge.textContent = arr.length;
+  badge.classList.toggle('show', arr.length > 0);
+  // upload panel
+  document.getElementById('uploadExclText').value = txt;
+  document.getElementById('uploadBadge').textContent = arr.length + ' excluidos';
+  // modal
+  document.getElementById('modalTextarea').value = txt;
+  // results bar
+  const bar = document.getElementById('exclResultsBar');
+  document.getElementById('exclResultsText').textContent =
+    arr.length > 0
+      ? `${arr.length} CP${arr.length!==1?'s':''} excluido${arr.length!==1?'s':''} del análisis`
+      : 'Sin exclusiones activas';
+  bar.classList.toggle('show', true); // always show bar in results
+}
+
+function applyAndSaveExcl(txt) {
+  const arr = parseExclText(txt);
+  saveExclusions(arr);
+  syncExclUI();
+  // Si hay resultados activos, refrescar la vista
+  if (activeRunId) reloadActiveRun();
+}
+
+// Sidebar toggle
+document.getElementById('sidebarExclHeader').addEventListener('click', () => {
+  const body = document.getElementById('sidebarExclBody');
+  const chev = document.getElementById('sidebarChevron');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+});
+document.getElementById('sidebarExclSave').addEventListener('click', () => {
+  applyAndSaveExcl(document.getElementById('sidebarExclText').value);
+});
+
+// Upload panel — sincroniza en tiempo real con sidebar al teclear
+document.getElementById('uploadExclText').addEventListener('input', function() {
+  document.getElementById('sidebarExclText').value = this.value;
+  document.getElementById('uploadBadge').textContent = parseExclText(this.value).length + ' excluidos';
+});
+document.getElementById('uploadExclText').addEventListener('blur', function() {
+  applyAndSaveExcl(this.value);
+});
+
+// Botón "Exclusiones" en topbar resultados → abre modal
+document.getElementById('editExclBtn').addEventListener('click', openModal);
+document.getElementById('exclResultsEditBtn').addEventListener('click', openModal);
+
+// Modal
+function openModal() {
+  syncExclUI(); // asegurar que el textarea del modal está al día
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('modalTextarea').focus();
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalCancel').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+document.getElementById('modalSave').addEventListener('click', () => {
+  applyAndSaveExcl(document.getElementById('modalTextarea').value);
+  closeModal();
+});
+// ─────────────────────────────────────────────────────────────
+
+// ── Historial ─────────────────────────────────────────────────
+function loadHistory(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch{return[];} }
 function saveHistory(h){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(h.slice(0,20)));}
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(h.slice(0,20))); }
   catch(e){
-    let trimmed=h.slice(0,10);
-    trimmed=trimmed.map((e,i)=>i>2?{...e,rows:[]}:e);
-    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(trimmed));}catch{}
+    let trimmed = h.slice(0,10).map((e,i) => i>2 ? {...e, rows:[]} : e);
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed)); }catch{}
   }
 }
 
-function saveRun(rows){
-  const hist=loadHistory();
-  const id=Date.now().toString();
+function saveRun(rows) {
+  const hist = loadHistory();
+  const id = Date.now().toString();
   hist.unshift({
-    id, date:new Date().toLocaleString('es-ES'),
-    label1:fname1||'Planificación', label2:fname2||'Metabase',
-    total:rows.length,
-    distinto:rows.filter(r=>r.t==='distinto').length,
-    soloplan:rows.filter(r=>r.t==='soloplan').length,
+    id, date: new Date().toLocaleString('es-ES'),
+    label1: fname1||'Planificación', label2: fname2||'Metabase',
+    total:    rows.length,
+    distinto: rows.filter(r=>r.t==='distinto').length,
+    soloplan: rows.filter(r=>r.t==='soloplan').length,
     soloquery:rows.filter(r=>r.t==='soloquery').length,
     rows
   });
@@ -399,79 +725,105 @@ function saveRun(rows){
   return id;
 }
 
-function deleteRun(id){
-  saveHistory(loadHistory().filter(e=>e.id!==id));
+function deleteRun(id) {
+  saveHistory(loadHistory().filter(e => e.id !== id));
   renderSidebar();
-  if(activeRunId===id){activeRunId=null;showUpload();}
+  if (activeRunId === id) { activeRunId=null; showUpload(); }
 }
 
-function renderSidebar(){
-  const hist=loadHistory();
-  const list=document.getElementById('histList');
-  if(!hist.length){
-    list.innerHTML='<div class="hist-empty">Sin comparativas guardadas.<br>Ejecuta la primera para verla aquí.</div>';
+function renderSidebar() {
+  const hist = loadHistory();
+  const list = document.getElementById('histList');
+  if (!hist.length) {
+    list.innerHTML = '<div class="hist-empty">Sin comparativas guardadas.<br>Ejecuta la primera para verla aquí.</div>';
     return;
   }
-  list.innerHTML=hist.map(e=>`
+  list.innerHTML = hist.map(e => `
     <div class="hist-item ${e.id===activeRunId?'active':''}" data-id="${e.id}">
       <button class="hist-del" data-del="${e.id}" title="Eliminar">✕</button>
       <div class="hist-item-date">${e.date}</div>
       <div class="hist-item-total">${e.total.toLocaleString()}</div>
-      <div class="hist-item-label">no coincidencias</div>
+      <div class="hist-item-label">no coincidencias (bruto)</div>
       <div class="hist-pills">
         <span class="hist-pill hp-y">${e.distinto} distinto</span>
         <span class="hist-pill hp-b">${e.soloplan} solo plan.</span>
         <span class="hist-pill hp-g">${e.soloquery} solo query</span>
       </div>
     </div>`).join('');
-  list.querySelectorAll('.hist-item').forEach(el=>
-    el.addEventListener('click',function(ev){
-      if(ev.target.closest('[data-del]')) return;
+  list.querySelectorAll('.hist-item').forEach(el =>
+    el.addEventListener('click', function(ev) {
+      if (ev.target.closest('[data-del]')) return;
       loadRun(this.dataset.id);
     })
   );
-  list.querySelectorAll('[data-del]').forEach(btn=>
-    btn.addEventListener('click',function(ev){
+  list.querySelectorAll('[data-del]').forEach(btn =>
+    btn.addEventListener('click', function(ev) {
       ev.stopPropagation();
-      if(confirm('¿Eliminar esta comparativa del historial?')) deleteRun(this.dataset.del);
+      if (confirm('¿Eliminar esta comparativa del historial?')) deleteRun(this.dataset.del);
     })
   );
 }
 
-function loadRun(id){
-  const entry=loadHistory().find(e=>e.id===id);
-  if(!entry) return;
-  activeRunId=id;
-  currentRows=entry.rows||[];
-  document.getElementById('res-date').textContent=entry.date;
-  document.getElementById('sn0').textContent=entry.total.toLocaleString();
-  document.getElementById('sn1').textContent=entry.distinto.toLocaleString();
-  document.getElementById('sn2').textContent=entry.soloplan.toLocaleString();
-  document.getElementById('sn3').textContent=entry.soloquery.toLocaleString();
-  ['sc0','sc1','sc2','sc3'].forEach((id,i)=>{
-    const el=document.getElementById(id);
+function applyExclusionsToRows(rows) {
+  const excl = getExclSet();
+  if (!excl.size) return rows;
+  return rows.filter(r => !excl.has(r.cp));
+}
+
+function reloadActiveRun() {
+  if (!activeRunId) return;
+  const entry = loadHistory().find(e => e.id === activeRunId);
+  if (!entry) return;
+  // Aplicar exclusiones sobre las filas crudas
+  const visibleRows = applyExclusionsToRows(entry.rows || []);
+  currentRows = visibleRows;
+  // Actualizar contadores con exclusiones aplicadas
+  document.getElementById('sn0').textContent = visibleRows.length.toLocaleString();
+  document.getElementById('sn1').textContent = visibleRows.filter(r=>r.t==='distinto').length.toLocaleString();
+  document.getElementById('sn2').textContent = visibleRows.filter(r=>r.t==='soloplan').length.toLocaleString();
+  document.getElementById('sn3').textContent = visibleRows.filter(r=>r.t==='soloquery').length.toLocaleString();
+  curPage = 1;
+  applyFilter();
+  syncExclUI();
+}
+
+function loadRun(id) {
+  const entry = loadHistory().find(e => e.id === id);
+  if (!entry) return;
+  activeRunId = id;
+  const visibleRows = applyExclusionsToRows(entry.rows || []);
+  currentRows = visibleRows;
+  document.getElementById('res-date').textContent = entry.date;
+  document.getElementById('sn0').textContent = visibleRows.length.toLocaleString();
+  document.getElementById('sn1').textContent = visibleRows.filter(r=>r.t==='distinto').length.toLocaleString();
+  document.getElementById('sn2').textContent = visibleRows.filter(r=>r.t==='soloplan').length.toLocaleString();
+  document.getElementById('sn3').textContent = visibleRows.filter(r=>r.t==='soloquery').length.toLocaleString();
+  ['sc0','sc1','sc2','sc3'].forEach((sid,i) => {
+    const el = document.getElementById(sid);
     el.classList.remove('vis');
-    setTimeout(()=>el.classList.add('vis'),i*70);
+    setTimeout(() => el.classList.add('vis'), i*70);
   });
   curFilter='all'; curPage=1;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('act'));
   document.querySelector('[data-f="all"]').classList.add('act');
   document.getElementById('searchBox').value='';
   applyFilter();
+  syncExclUI();
   showResults();
   renderSidebar();
 }
 
-function showUpload(){
-  document.getElementById('view-upload').style.display='block';
-  document.getElementById('view-results').style.display='none';
+function showUpload() {
+  document.getElementById('view-upload').style.display = 'block';
+  document.getElementById('view-results').style.display = 'none';
 }
-function showResults(){
-  document.getElementById('view-upload').style.display='none';
-  document.getElementById('view-results').style.display='block';
+function showResults() {
+  document.getElementById('view-upload').style.display = 'none';
+  document.getElementById('view-results').style.display = 'block';
 }
 
-function pad(s){return String(s).trim().padStart(5,'0');}
+// ── Parsing ───────────────────────────────────────────────────
+function pad(s){ return String(s).trim().padStart(5,'0'); }
 function parseDate(v){
   if(!v) return null;
   const s=String(v).trim();
@@ -482,9 +834,9 @@ function parseDate(v){
   if(/^\d+(\.\d+)?$/.test(s)){const d=new Date(Math.round((parseFloat(s)-25569)*86400*1000));if(!isNaN(d))return d;}
   return null;
 }
-function fmt(d){return d?d.toISOString().slice(0,10):'';}
+function fmt(d){ return d ? d.toISOString().slice(0,10) : ''; }
 
-function readFile(file,cb){
+function readFile(file, cb) {
   const r=new FileReader(), isCSV=file.name.toLowerCase().endsWith('.csv');
   r.onload=e=>{
     const wb=isCSV
@@ -495,10 +847,10 @@ function readFile(file,cb){
   isCSV?r.readAsText(file,'UTF-8'):r.readAsArrayBuffer(file);
 }
 
-document.getElementById('file1').addEventListener('change',function(){
+document.getElementById('file1').addEventListener('change', function(){
   if(!this.files[0]) return;
   fname1=this.files[0].name;
-  readFile(this.files[0],rows=>{
+  readFile(this.files[0], rows=>{
     d1=rows;
     document.getElementById('st1').textContent='✓ '+fname1;
     document.getElementById('dot1').classList.add('on');
@@ -506,10 +858,10 @@ document.getElementById('file1').addEventListener('change',function(){
     checkReady();
   });
 });
-document.getElementById('file2').addEventListener('change',function(){
+document.getElementById('file2').addEventListener('change', function(){
   if(!this.files[0]) return;
   fname2=this.files[0].name;
-  readFile(this.files[0],rows=>{
+  readFile(this.files[0], rows=>{
     d2=rows;
     document.getElementById('st2').textContent='✓ '+fname2;
     document.getElementById('dot2').classList.add('on');
@@ -517,16 +869,18 @@ document.getElementById('file2').addEventListener('change',function(){
     checkReady();
   });
 });
-function checkReady(){document.getElementById('runBtn').disabled=!(d1&&d2);}
+function checkReady(){ document.getElementById('runBtn').disabled=!(d1&&d2); }
 
-function prog(pct,label){
+function prog(pct, label){
   document.getElementById('progFill').style.width=pct+'%';
   document.getElementById('progLabel').textContent=label;
 }
 
-document.getElementById('runBtn').addEventListener('click',()=>{
+document.getElementById('runBtn').addEventListener('click', ()=>{
   document.getElementById('progWrap').style.display='block';
-  setTimeout(runComparativa,50);
+  // Guardar exclusiones del textarea de upload antes de ejecutar
+  applyAndSaveExcl(document.getElementById('uploadExclText').value);
+  setTimeout(runComparativa, 50);
 });
 
 function runComparativa(){
@@ -555,25 +909,25 @@ function runComparativa(){
       });
       prog(65,'Cruzando datos...');
       setTimeout(()=>{
-        const rows=[];
         const allKeys=new Set([...planMap.keys(),...queryMap.keys()]);
+        const rawRows=[];
         allKeys.forEach(key=>{
           const [cp,semana]=key.split('|');
-          const cP=planMap.get(key),cQ=queryMap.get(key);
-          if(cP&&cQ){if(cP!==cQ)rows.push({t:'distinto',cp,semana,cP,cQ});}
-          else if(cP&&!cQ) rows.push({t:'soloplan',cp,semana,cP,cQ:''});
-          else if(!cP&&cQ) rows.push({t:'soloquery',cp,semana,cP:'',cQ});
+          const cP=planMap.get(key), cQ=queryMap.get(key);
+          if(cP&&cQ){ if(cP!==cQ) rawRows.push({t:'distinto',cp,semana,cP,cQ}); }
+          else if(cP&&!cQ) rawRows.push({t:'soloplan',cp,semana,cP,cQ:''});
+          else if(!cP&&cQ) rawRows.push({t:'soloquery',cp,semana,cP:'',cQ});
         });
-        rows.sort((a,b)=>a.cp.localeCompare(b.cp)||a.semana.localeCompare(b.semana));
+        rawRows.sort((a,b)=>a.cp.localeCompare(b.cp)||a.semana.localeCompare(b.semana));
         prog(90,'Guardando resultados...');
         setTimeout(()=>{
-          const id=saveRun(rows);
+          const id=saveRun(rawRows); // guardamos filas crudas (sin exclusiones)
           activeRunId=id;
           renderSidebar();
           prog(100,'Listo');
           setTimeout(()=>{
             document.getElementById('progWrap').style.display='none';
-            loadRun(id);
+            loadRun(id); // loadRun aplica exclusiones al mostrar
           },400);
         },80);
       },80);
@@ -581,6 +935,7 @@ function runComparativa(){
   },50);
 }
 
+// ── Tabla y filtros ──────────────────────────────────────────
 function applyFilter(){
   const q=document.getElementById('searchBox').value.trim().toLowerCase();
   filteredRows=currentRows.filter(r=>{
@@ -590,7 +945,7 @@ function applyFilter(){
 }
 
 function renderTable(){
-  const start=(curPage-1)*PAGE,end=start+PAGE,total=filteredRows.length;
+  const start=(curPage-1)*PAGE, end=start+PAGE, total=filteredRows.length;
   document.getElementById('tbody').innerHTML=filteredRows.slice(start,end).map(r=>{
     const [cls,lbl]=r.t==='distinto'?['ty','Centro distinto']:r.t==='soloplan'?['tb','Solo plan.']:['tg','Solo query'];
     return `<tr><td><span class="tag ${cls}">${lbl}</span></td><td>${r.cp}</td><td>${r.semana}</td><td>${r.cP||'—'}</td><td>${r.cQ||'—'}</td></tr>`;
@@ -602,24 +957,25 @@ function renderTable(){
 
 document.getElementById('prevBtn').addEventListener('click',()=>{curPage--;renderTable();});
 document.getElementById('nextBtn').addEventListener('click',()=>{curPage++;renderTable();});
-document.getElementById('searchBox').addEventListener('input',applyFilter);
+document.getElementById('searchBox').addEventListener('input', applyFilter);
 document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',function(){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('act'));
   this.classList.add('act'); curFilter=this.dataset.f; applyFilter();
 }));
 
+// ── Nueva comparativa ────────────────────────────────────────
 document.getElementById('newBtn').addEventListener('click',()=>{
   activeRunId=null; d1=null; d2=null; fname1=''; fname2='';
   ['file1','file2'].forEach(id=>document.getElementById(id).value='');
-  ['st1','st2'].forEach((id,i)=>document.getElementById(id).textContent='Arrastra o haz clic para subir');
-  ['dot1','dot2','card1','card2'].forEach(id=>{
-    document.getElementById(id).classList.remove('on','loaded');
-  });
+  ['st1','st2'].forEach(id=>document.getElementById(id).textContent='Arrastra o haz clic para subir');
+  ['dot1','dot2','card1','card2'].forEach(id=>document.getElementById(id).classList.remove('on','loaded'));
   document.getElementById('runBtn').disabled=true;
   document.getElementById('progWrap').style.display='none';
+  syncExclUI();
   renderSidebar(); showUpload();
 });
 
+// ── Descarga Excel ───────────────────────────────────────────
 document.getElementById('dlBtn').addEventListener('click',()=>{
   if(!currentRows.length) return;
   const wsData=[['Tipo','Motivo','CP','Semana','Centro Planificación','Centro Query']];
@@ -631,6 +987,12 @@ document.getElementById('dlBtn').addEventListener('click',()=>{
   const ws=XLSX.utils.aoa_to_sheet(wsData);
   ws['!cols']=[20,25,12,14,22,18].map(w=>({wch:w}));
   XLSX.utils.book_append_sheet(wb,ws,'No coincidencias');
+  const excl=loadExclusions();
+  if(excl.length){
+    const wsE=XLSX.utils.aoa_to_sheet([['CP excluido'],...excl.map(c=>[c])]);
+    wsE['!cols']=[{wch:14}];
+    XLSX.utils.book_append_sheet(wb,wsE,'CPs excluidos');
+  }
   const dist=currentRows.filter(r=>r.t==='distinto').length;
   const sp=currentRows.filter(r=>r.t==='soloplan').length;
   const sq=currentRows.filter(r=>r.t==='soloquery').length;
@@ -639,24 +1001,27 @@ document.getElementById('dlBtn').addEventListener('click',()=>{
     ['Centro distinto','Mismo CP+semana pero distinto centro',dist],
     ['Solo planificación','CP+semana en plan. pero no en query',sp],
     ['Solo query','CP+semana en query pero no en plan.',sq],
-    ['','',''],['TOTAL','',currentRows.length]
+    ['','',''],['TOTAL','',currentRows.length],
+    ['','',''],
+    ['CPs excluidos del análisis','',excl.length]
   ]);
   wsR['!cols']=[22,42,16].map(w=>({wch:w}));
   XLSX.utils.book_append_sheet(wb,wsR,'Resumen');
   XLSX.writeFile(wb,`no_coincidencias_${new Date().toISOString().slice(0,10)}.xlsx`);
 });
 
-// ── Theme toggle ──────────────────────────────────────────────────
-const themeBtn = document.getElementById('themeBtn');
-const savedTheme = localStorage.getItem('theme_cp') || 'dark';
-if(savedTheme === 'light'){ document.documentElement.classList.add('light'); themeBtn.textContent = '🌙'; }
-themeBtn.addEventListener('click', () => {
-  const isLight = document.documentElement.classList.toggle('light');
-  themeBtn.textContent = isLight ? '🌙' : '☀️';
-  localStorage.setItem('theme_cp', isLight ? 'light' : 'dark');
+// ── Theme toggle ─────────────────────────────────────────────
+const themeBtn=document.getElementById('themeBtn');
+const savedTheme=localStorage.getItem('theme_cp')||'dark';
+if(savedTheme==='light'){ document.documentElement.classList.add('light'); themeBtn.textContent='🌙'; }
+themeBtn.addEventListener('click',()=>{
+  const isLight=document.documentElement.classList.toggle('light');
+  themeBtn.textContent=isLight?'🌙':'☀️';
+  localStorage.setItem('theme_cp',isLight?'light':'dark');
 });
 
-// Init
+// ── Init ─────────────────────────────────────────────────────
+syncExclUI();
 renderSidebar();
 const hist=loadHistory();
 if(hist.length) loadRun(hist[0].id); else showUpload();
