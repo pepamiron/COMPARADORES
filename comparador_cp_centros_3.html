@@ -619,13 +619,16 @@ function parseExclText(txt) {
   return [...new Set(
     txt.split(/[\n,;]+/)
        .map(s => s.trim())
-       // quitar decimal tipo "30380.1" → "30380"
-       .map(s => s.replace(/^(\d+)\..*$/, '$1'))
-       // quitar espacios internos y caracteres no numéricos
-       .map(s => s.replace(/\D/g, ''))
        .filter(s => s.length > 0)
-       .map(s => s.padStart(5,'0'))
-       .filter(s => /^\d{5}$/.test(s))
+       .map(s => {
+         // Formato NNNNN.N (merca cp) → guardar tal cual normalizado
+         if (/^\d+\.\d+$/.test(s)) return s;
+         // Formato entero → padStart 5
+         const digits = s.replace(/\D/g, '');
+         if (!digits) return null;
+         return digits.padStart(5, '0');
+       })
+       .filter(Boolean)
   )];
 }
 function getExclSet() {
